@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_beige"
+    tools:context=".MainActivity">
+
+
+<!--hearts-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="@dimen/hearts_layout_width"
+        android:layout_height="@dimen/default_dimens"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_dimens"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart_with_frame" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_dimens"
+            android:layout_marginHorizontal="@dimen/heart_margins"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart_with_frame" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_dimens"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart_with_frame" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+<!--arrow buttons-->
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/main_FAB_left"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/default_margin"
+        android:backgroundTint="@color/light_blue"
+        android:clickable="true"
+        app:icon="@drawable/left_arrow"
+        app:iconSize="@dimen/default_dimens"
+        app:iconTint="@color/white"
+
+        />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/main_FAB_right"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/default_margin"
+        android:backgroundTint="@color/light_blue"
+        android:clickable="true"
+        app:icon="@drawable/right_arrow"
+        app:iconSize="@dimen/default_dimens"
+        app:iconTint="@color/white"
+
+        />
+
+<!--bottom character-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="76dp"
+        android:layout_centerInParent="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_aang50"
+            android:layout_width="@dimen/character_width"
+            android:layout_height="@dimen/character_height"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:src="@drawable/aang1"
+            android:visibility="invisible"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_aang51"
+            android:layout_width="@dimen/character_width"
+            android:layout_height="@dimen/character_height"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:src="@drawable/aang1" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_aang52"
+            android:layout_width="@dimen/character_width"
+            android:layout_height="@dimen/character_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:src="@drawable/aang1"
+            android:visibility="invisible"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+<!--matrix for fire-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="invisible"
+        >
+
+
+        <!--first column-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_00"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_10"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_20"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_30"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_40"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <!--second column-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_01"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_11"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_21"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_31"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_41"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <!--third column-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_02"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_12"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_22"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_32"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_42"
+                android:layout_width="@dimen/character_width"
+                android:layout_height="@dimen/character_height"
+                android:src="@drawable/fire" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
