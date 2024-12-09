@@ -48,11 +48,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    private fun gameProgress() {
+//        gameManager.spawnFire()
+//        updateUI()
+//        gameManager.moveFireDown()
+//    }
+
+
     private fun gameProgress() {
         gameManager.spawnFire()
         updateUI()
-        gameManager.moveFireDown()
+        val firesToClear = gameManager.moveFireDown() // Move fires and track last-row fires
+//        updateUI()
+
+        // Handle fires in the last row
+        for ((row, col) in firesToClear) {
+            main_IMG_fire[row][col].visibility = View.VISIBLE // Show fire in last row
+
+            // Schedule its disappearance after a brief delay
+            Handler(Looper.getMainLooper()).postDelayed({
+                main_IMG_fire[row][col].visibility = View.INVISIBLE
+                gameManager.getFireMatrix()[row][col] = 0
+            }, 300)
+        }
     }
+
 
     private fun startGame() {
         if (!gameStarted) {

@@ -30,7 +30,9 @@ class GameManager {
         fireMatrix[0][randomCol] = 2 // fire image - position on the top
     }
 
-    fun moveFireDown() {
+
+    fun moveFireDown(): List<Pair<Int, Int>> {
+        val firesToClear = mutableListOf<Pair<Int, Int>>() // To track fires to clear later
 
         for (row in fireMatrix.size - 1 downTo 1) {
             for (col in fireMatrix[row].indices) {
@@ -40,7 +42,15 @@ class GameManager {
                 }
             }
         }
+        // Collect fires in the last row to show them briefly before clearing
+        for (col in fireMatrix[fireMatrix.size - 1].indices) {
+            if (fireMatrix[fireMatrix.size - 1][col] == 2) {
+                firesToClear.add(Pair(fireMatrix.size - 1, col)) // Add row, col pair
+            }
+        }
+        return firesToClear
     }
+
 
     fun checkCollision(): Boolean {
         return playerMatrix[randomCol] == 1 && fireMatrix[fireMatrix.size - 1][randomCol] == 2
