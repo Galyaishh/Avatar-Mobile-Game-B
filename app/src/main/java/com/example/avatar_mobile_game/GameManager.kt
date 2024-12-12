@@ -2,14 +2,18 @@ package com.example.avatar_mobile_game
 
 import com.example.avatar_mobile_game.utilities.Constants
 
-class GameManager {
+class GameManager(private val livesCount: Int = 3) {
 
     private var playerPosition = 1
-    private var lives = Constants.LIVES
     private val playerMatrix = IntArray(3) { 0 } //for logical
     private val fireMatrix = Array(5) { IntArray(3) { 0 } } //for logical
 
-    private var randomCol: Int = -1 // Initialize with a default value
+    var numberOfCollisions: Int = 0
+        private set
+
+    val isGameOver: Boolean
+        get() = numberOfCollisions == livesCount
+
 
     init {
         playerMatrix[playerPosition] = 1
@@ -21,52 +25,41 @@ class GameManager {
             playerMatrix[playerPosition] = 0 // no image
             playerPosition += direction
             playerMatrix[playerPosition] = 1 // player image
+            if (checkCollision())
+                handleCollision()
         }
     }
+
 
     fun spawnFire() {
 
-        randomCol = (0 until Constants.COLS).random()
-        fireMatrix[0][randomCol] = 2 // fire image - position on the top
+        val randomCol = (0 until Constants.COLS).random()
+        fireMatrix[0][randomCol] = 2 // fire image
     }
 
 
-    fun moveFireDown(): List<Pair<Int, Int>> {
-        val firesToClear = mutableListOf<Pair<Int, Int>>() // To track fires to clear later
-
-        for (row in fireMatrix.size - 1 downTo 1) {
-            for (col in fireMatrix[row].indices) {
-                if (fireMatrix[row - 1][col] == 2) { // check for fire image in row above
-                    fireMatrix[row][col] = 2
-                    fireMatrix[row - 1][col] = 0 //no image
-                }
-            }
+    fun moveFireDown() {
+        // Move fire images down
+        for (row in fireMatrix.size - 1 downTo 1) { // Iterate from bottom to top
+            for (col in fireMatrix[row].indices)  // Iterate through each column
+                fireMatrix[row][col] = fireMatrix[row - 1][col]     // Move fire image down
         }
-        // Collect fires in the last row to show them briefly before clearing
-        for (col in fireMatrix[fireMatrix.size - 1].indices) {
-            if (fireMatrix[fireMatrix.size - 1][col] == 2) {
-                firesToClear.add(Pair(fireMatrix.size - 1, col)) // Add row, col pair
-            }
-        }
-        return firesToClear
+        for (col in fireMatrix[0].indices)
+            fireMatrix[0][col] = 0 // Clear the top row
     }
 
 
     fun checkCollision(): Boolean {
-        return playerMatrix[randomCol] == 1 && fireMatrix[fireMatrix.size - 1][randomCol] == 2
+        return playerMatrix[playerPosition] == 1 && fireMatrix[fireMatrix.size - 1][playerPosition] == 2
     }
 
     fun handleCollision() {
-
-
+        numberOfCollisions++
     }
 
     fun getPlayerMatrix(): IntArray = playerMatrix
 
     fun getFireMatrix(): Array<IntArray> = fireMatrix
-
-    fun getLives(): Int = lives
-
 
 }
 

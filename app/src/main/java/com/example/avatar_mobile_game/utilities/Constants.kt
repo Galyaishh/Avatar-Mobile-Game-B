@@ -9,7 +9,6 @@ object Constants {
         const val STATUS_KEY :String = "STATUS_KEY"
 
         const val COLS = 3        // Number of columns in the matrix
-        const val LIVES = 3       // Number of lives the player starts with
 
 
 

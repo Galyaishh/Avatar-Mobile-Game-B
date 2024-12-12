@@ -3,14 +3,10 @@ package com.example.avatar_mobile_game
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.ImageViewCompat
 import com.example.avatar_mobile_game.utilities.Constants
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         findViews()
-        gameManager = GameManager()
+        gameManager = GameManager(main_IMG_hearts.size)
         initViews()
         startGame()
     }
@@ -41,36 +37,29 @@ class MainActivity : AppCompatActivity() {
 
     val runnable: Runnable = object : Runnable {
         override fun run() {
-            //reschedule:
+            //reschedule
             handler.postDelayed(this, Constants.DELAY)
-            //refresh UI:
+            //refresh UI
+
+//            if (gameManager.isGameOver)
+//                stopGame()
+//            else
             gameProgress()
         }
     }
 
-//    private fun gameProgress() {
-//        gameManager.spawnFire()
-//        updateUI()
-//        gameManager.moveFireDown()
-//    }
-
 
     private fun gameProgress() {
+        gameManager.moveFireDown()
         gameManager.spawnFire()
-        updateUI()
-        val firesToClear = gameManager.moveFireDown() // Move fires and track last-row fires
-//        updateUI()
+        updateFireUI()
 
-        // Handle fires in the last row
-        for ((row, col) in firesToClear) {
-            main_IMG_fire[row][col].visibility = View.VISIBLE // Show fire in last row
+        if (gameManager.checkCollision())
+            gameManager.handleCollision()
+        updateLivesUI()
 
-            // Schedule its disappearance after a brief delay
-            Handler(Looper.getMainLooper()).postDelayed({
-                main_IMG_fire[row][col].visibility = View.INVISIBLE
-                gameManager.getFireMatrix()[row][col] = 0
-            }, 300)
-        }
+        if (gameManager.isGameOver)
+            stopGame()
     }
 
 
@@ -88,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI() {
+    private fun updateFireUI() {
 
         //update fire image
 
@@ -147,21 +136,20 @@ class MainActivity : AppCompatActivity() {
                 findViewById(R.id.main_MAT_42)
             )
         )
-
     }
 
     private fun initViews() {
         main_FAB_left.setOnClickListener {
             gameManager.movePlayer(-1)
-            updateUIPlayer()
+            updatePlayerUI()
         }
         main_FAB_right.setOnClickListener {
             gameManager.movePlayer(1)
-            updateUIPlayer()
+            updatePlayerUI()
         }
     }
 
-    private fun updateUIPlayer() {
+    private fun updatePlayerUI() {
 
         for (col in gameManager.getPlayerMatrix().indices) {
             if (gameManager.getPlayerMatrix()[col] == 1) // player image
@@ -169,7 +157,11 @@ class MainActivity : AppCompatActivity() {
             else
                 main_IMG_player[col].visibility = View.INVISIBLE
         }
+    }
 
+    private fun updateLivesUI() {
+        if (gameManager.numberOfCollisions != 0)
+            main_IMG_hearts[gameManager.numberOfCollisions - 1].visibility = View.INVISIBLE
     }
 
 
