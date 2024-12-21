@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.avatar_mobile_game.utilities.Constants
+import com.example.avatar_mobile_game.utilities.SignalManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         findViews()
-        gameManager = GameManager(main_IMG_hearts.size)
+        gameManager = GameManager(main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
         initViews()
         startGame()
     }
@@ -37,29 +38,46 @@ class MainActivity : AppCompatActivity() {
 
     val runnable: Runnable = object : Runnable {
         override fun run() {
-            //reschedule
             handler.postDelayed(this, Constants.DELAY)
-            //refresh UI
-
-//            if (gameManager.isGameOver)
-//                stopGame()
-//            else
             gameProgress()
         }
     }
 
 
     private fun gameProgress() {
-        gameManager.moveFireDown()
-        gameManager.spawnFire()
+        if(!gameManager.isGameOver) {
+            gameManager.moveFireDown()
+            gameManager.spawnFire()
+            updateFireUI()
+            if (gameManager.checkCollision())
+                gameManager.handleCollision()
+            updateLivesUI()
+        }
+        else
+            loseGame()
+
+
+//        gameManager.moveFireDown()
+//        gameManager.spawnFire()
+//        updateFireUI()
+//
+//        if (gameManager.checkCollision())
+//            gameManager.handleCollision()
+//
+//        updateLivesUI()
+//
+//        if (gameManager.isGameOver)
+//            loseGame()
+
+    }
+
+    private fun loseGame() {
+        stopGame()
+        gameManager.resetGame()
         updateFireUI()
-
-        if (gameManager.checkCollision())
-            gameManager.handleCollision()
+        updatePlayerUI()
         updateLivesUI()
-
-        if (gameManager.isGameOver)
-            stopGame()
+        startGame()
     }
 
 
@@ -78,9 +96,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateFireUI() {
-
-        //update fire image
-
         var fireMatrix = gameManager.getFireMatrix()
         for (row in fireMatrix.indices) {
             for (col in fireMatrix[row].indices) {
@@ -90,6 +105,27 @@ class MainActivity : AppCompatActivity() {
                     main_IMG_fire[row][col].visibility = View.INVISIBLE
             }
         }
+    }
+
+    private fun updatePlayerUI() {
+
+        for (col in gameManager.getPlayerMatrix().indices) {
+            if (gameManager.getPlayerMatrix()[col] == 1) // player image
+                main_IMG_player[col].visibility = View.VISIBLE
+            else
+                main_IMG_player[col].visibility = View.INVISIBLE
+        }
+    }
+
+    private fun updateLivesUI() {
+        if (gameManager.numberOfCollisions != 0)
+            main_IMG_hearts[gameManager.numberOfCollisions - 1].visibility = View.INVISIBLE
+        else{
+            for (heart in main_IMG_hearts)
+                heart.visibility = View.VISIBLE
+
+        }
+
     }
 
 
@@ -147,21 +183,6 @@ class MainActivity : AppCompatActivity() {
             gameManager.movePlayer(1)
             updatePlayerUI()
         }
-    }
-
-    private fun updatePlayerUI() {
-
-        for (col in gameManager.getPlayerMatrix().indices) {
-            if (gameManager.getPlayerMatrix()[col] == 1) // player image
-                main_IMG_player[col].visibility = View.VISIBLE
-            else
-                main_IMG_player[col].visibility = View.INVISIBLE
-        }
-    }
-
-    private fun updateLivesUI() {
-        if (gameManager.numberOfCollisions != 0)
-            main_IMG_hearts[gameManager.numberOfCollisions - 1].visibility = View.INVISIBLE
     }
 
 
