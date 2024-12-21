@@ -1,14 +1,14 @@
 package com.example.avatar_mobile_game
 
-import com.example.avatar_mobile_game.utilities.Constants
+import com.example.avatar_mobile_game.utilities.Constants.ImageState
 import com.example.avatar_mobile_game.utilities.SignalManager
 import kotlin.random.Random
 
-class GameManager(private val livesCount: Int = 3, private val rows: Int, private val cols: Int) {
+class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: Int) {
 
     private var playerPosition = 1
-    private val playerMatrix = IntArray(cols) { 0 }
-    private val fireMatrix = Array(rows) { IntArray(cols) { 0 } }
+    private val playerMatrix = Array(cols) { ImageState.NONE}
+    private val fireMatrix = Array(rows) { Array(cols) { ImageState.NONE } }
 
     var numberOfCollisions: Int = 0
         private set
@@ -19,15 +19,15 @@ class GameManager(private val livesCount: Int = 3, private val rows: Int, privat
 
 
     init {
-        playerMatrix[playerPosition] = 1
+        playerMatrix[playerPosition] = ImageState.PLAYER
     }
 
     fun movePlayer(direction: Int) {
 
-        if (playerPosition + direction >= 0 && playerPosition + direction < Constants.COLS) {
-            playerMatrix[playerPosition] = 0 // no image
+        if (playerPosition + direction in 0 until cols) {
+            playerMatrix[playerPosition] = ImageState.NONE
             playerPosition += direction
-            playerMatrix[playerPosition] = 1 // player image
+            playerMatrix[playerPosition] = ImageState.PLAYER
             if (checkCollision())
                 handleCollision()
         }
@@ -36,23 +36,22 @@ class GameManager(private val livesCount: Int = 3, private val rows: Int, privat
 
     fun spawnFire() {
         val randomCol = Random.nextInt(cols)
-        fireMatrix[0][randomCol] = 2 // fire image
+        fireMatrix[0][randomCol] = ImageState.FIRE
     }
 
 
     fun moveFireDown() {
-        // Move fire images down
         for (row in fireMatrix.size - 1 downTo 1) { // Iterate from bottom to top
-            for (col in fireMatrix[row].indices)  // Iterate through each column
+            for (col in fireMatrix[row].indices)
                 fireMatrix[row][col] = fireMatrix[row - 1][col]     // Move fire image down
         }
         for (col in fireMatrix[0].indices)
-            fireMatrix[0][col] = 0 // Clear the top row
+            fireMatrix[0][col] = ImageState.NONE // Clear the top row
     }
 
 
     fun checkCollision(): Boolean {
-        return playerMatrix[playerPosition] == 1 && fireMatrix[fireMatrix.size - 1][playerPosition] == 2
+        return playerMatrix[playerPosition] == ImageState.PLAYER && fireMatrix[fireMatrix.size - 1][playerPosition] == ImageState.FIRE
     }
 
     fun handleCollision() {
@@ -66,22 +65,20 @@ class GameManager(private val livesCount: Int = 3, private val rows: Int, privat
 
     fun resetGame(){
 
-        playerMatrix[playerPosition]=0
+        playerMatrix.fill(ImageState.NONE)
         playerPosition = 1
-        playerMatrix[playerPosition] = 1
-        numberOfCollisions = 0
+        playerMatrix[playerPosition] = ImageState.PLAYER
 
         for (row in fireMatrix.indices)
-            for (col in fireMatrix[row].indices)
-                fireMatrix[row][col] = 0
+            fireMatrix[row].fill(ImageState.NONE)
 
-
+        numberOfCollisions = 0
     }
 
 
-    fun getPlayerMatrix(): IntArray = playerMatrix
+    fun getPlayerMatrix(): Array<ImageState> = playerMatrix
 
-    fun getFireMatrix(): Array<IntArray> = fireMatrix
+    fun getFireMatrix(): Array<Array<ImageState>> = fireMatrix
 
 }
 

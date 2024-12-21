@@ -45,29 +45,15 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun gameProgress() {
-        if(!gameManager.isGameOver) {
+        if (!gameManager.isGameOver) {
             gameManager.moveFireDown()
             gameManager.spawnFire()
             updateFireUI()
             if (gameManager.checkCollision())
                 gameManager.handleCollision()
             updateLivesUI()
-        }
-        else
+        } else
             loseGame()
-
-
-//        gameManager.moveFireDown()
-//        gameManager.spawnFire()
-//        updateFireUI()
-//
-//        if (gameManager.checkCollision())
-//            gameManager.handleCollision()
-//
-//        updateLivesUI()
-//
-//        if (gameManager.isGameOver)
-//            loseGame()
 
     }
 
@@ -96,10 +82,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateFireUI() {
-        var fireMatrix = gameManager.getFireMatrix()
+        val fireMatrix = gameManager.getFireMatrix()
         for (row in fireMatrix.indices) {
             for (col in fireMatrix[row].indices) {
-                if (fireMatrix[row][col] == 2)
+                if (fireMatrix[row][col] == Constants.ImageState.FIRE)
                     main_IMG_fire[row][col].visibility = View.VISIBLE
                 else
                     main_IMG_fire[row][col].visibility = View.INVISIBLE
@@ -110,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     private fun updatePlayerUI() {
 
         for (col in gameManager.getPlayerMatrix().indices) {
-            if (gameManager.getPlayerMatrix()[col] == 1) // player image
+            if (gameManager.getPlayerMatrix()[col] == Constants.ImageState.PLAYER) // player image
                 main_IMG_player[col].visibility = View.VISIBLE
             else
                 main_IMG_player[col].visibility = View.INVISIBLE
@@ -118,14 +104,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateLivesUI() {
-        if (gameManager.numberOfCollisions != 0)
-            main_IMG_hearts[gameManager.numberOfCollisions - 1].visibility = View.INVISIBLE
-        else{
-            for (heart in main_IMG_hearts)
-                heart.visibility = View.VISIBLE
 
+        main_IMG_hearts.forEachIndexed { index, heart ->
+            heart.visibility =
+                if (index < gameManager.numberOfCollisions) View.INVISIBLE else View.VISIBLE
         }
-
     }
 
 
