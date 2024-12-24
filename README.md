@@ -15,15 +15,6 @@ An engaging and interactive mobile game where players control an avatar to navig
 
 ---
 
-## Demo Video
-
-<video controls>
-  <source src="Screen recording avatar game.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
----
-
 ## How to Play
 
 1. **Launch the Game**: Open the game on your mobile device or emulator.
