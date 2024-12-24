@@ -3,6 +3,7 @@ package com.example.avatar_mobile_game
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         findViews()
         gameManager = GameManager(main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
         initViews()
-        startGame()
     }
 
     val handler: Handler = Handler(Looper.getMainLooper())
@@ -66,11 +66,24 @@ class MainActivity : AppCompatActivity() {
         startGame()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!gameStarted && !gameManager.isGameOver) {
+            startGame()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopGame()
+    }
+
 
     private fun startGame() {
         if (!gameStarted) {
             handler.postDelayed(runnable, Constants.DELAY)
-            gameStarted = true;
+            gameStarted = true
+
         }
     }
 
@@ -80,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             gameStarted = false
         }
     }
+
 
     private fun updateFireUI() {
         val fireMatrix = gameManager.getFireMatrix()

@@ -6,7 +6,7 @@ import kotlin.random.Random
 
 class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: Int) {
 
-    private var playerPosition = 1
+    private var playerPosition = cols/2
     private val playerMatrix = Array(cols) { ImageState.NONE}
     private val fireMatrix = Array(rows) { Array(cols) { ImageState.NONE } }
 
@@ -51,7 +51,7 @@ class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: 
 
 
     fun checkCollision(): Boolean {
-        return playerMatrix[playerPosition] == ImageState.PLAYER && fireMatrix[fireMatrix.size - 1][playerPosition] == ImageState.FIRE
+        return fireMatrix[fireMatrix.size - 1][playerPosition] == ImageState.FIRE
     }
 
     fun handleCollision() {
@@ -66,7 +66,7 @@ class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: 
     fun resetGame(){
 
         playerMatrix.fill(ImageState.NONE)
-        playerPosition = 1
+        playerPosition = cols/2
         playerMatrix[playerPosition] = ImageState.PLAYER
 
         for (row in fireMatrix.indices)
