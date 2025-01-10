@@ -1,7 +1,6 @@
-package com.example.avatar_mobile_game
+package com.example.avatar_mobile_game.utilities
 
 import com.example.avatar_mobile_game.utilities.Constants.ImageState
-import com.example.avatar_mobile_game.utilities.SignalManager
 import kotlin.random.Random
 
 class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: Int) {
@@ -9,6 +8,8 @@ class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: 
     private var playerPosition = cols/2
     private val playerMatrix = Array(cols) { ImageState.NONE}
     private val fireMatrix = Array(rows) { Array(cols) { ImageState.NONE } }
+
+    var score: Int = 0
 
     var numberOfCollisions: Int = 0
         private set

@@ -5,19 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_beige"
+    android:background="@drawable/background_game"
     tools:context=".MainActivity">
 
 
-<!--hearts-->
+    <!--hearts-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="@dimen/hearts_layout_width"
         android:layout_height="@dimen/default_dimens"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="@dimen/default_margin">
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginRight="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_heart1"
@@ -43,13 +43,25 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        tools:text="000"
+        />
 
-<!--arrow buttons-->
+
+    <!--arrow buttons-->
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/main_FAB_left"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/arrow_dimen"
+        android:layout_height="@dimen/arrow_dimen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/default_margin"
@@ -63,8 +75,8 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/main_FAB_right"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/arrow_dimen"
+        android:layout_height="@dimen/arrow_dimen"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/default_margin"
@@ -76,54 +88,67 @@
 
         />
 
-<!--bottom character-->
+    <!--bottom character-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="85dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="85dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_aang50"
             android:layout_width="@dimen/character_width"
             android:layout_height="@dimen/character_height"
             android:layout_alignParentLeft="true"
-            android:layout_weight="1"
-            android:src="@drawable/aang1"
-            android:visibility="invisible"/>
+            android:layout_weight="1"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_aang51"
             android:layout_width="@dimen/character_width"
             android:layout_height="@dimen/character_height"
             android:layout_centerInParent="true"
-            android:layout_weight="1"
-            android:src="@drawable/aang1" />
-
+            android:layout_weight="1"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_aang52"
-            android:layout_width="@dimen/character_width"
-            android:layout_height="@dimen/character_height"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_weight="1"
             android:src="@drawable/aang1"
-            android:visibility="invisible"/>
+            android:visibility="visible" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_aang53"
+            android:layout_width="@dimen/character_width"
+            android:layout_height="@dimen/character_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_aang54"
+            android:layout_width="@dimen/character_width"
+            android:layout_height="@dimen/character_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-<!--matrix for fire-->
+    <!--matrix for fire-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginLeft="10dp"
-        >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp">
 
 
         <!--first column-->
@@ -134,39 +159,44 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_00"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_10"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_20"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_30"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_40"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_50"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_60"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -179,39 +209,42 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_01"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_11"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_21"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_31"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_41"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_51"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_61"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -224,44 +257,126 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_02"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:layout_weight="1"
-                android:visibility="invisible" />
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_12"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_22"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_32"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_MAT_42"
-                android:layout_width="@dimen/character_width"
-                android:layout_height="@dimen/character_height"
-                android:src="@drawable/fire"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_52"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_62"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <!-- Fourth Column -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_03"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_13"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_23"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_33"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_43"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_53"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_63"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <!--Fifth column-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_04"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_14"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_24"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_34"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_44"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_54"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_MAT_64"
+                android:layout_width="@dimen/fire_width"
+                android:layout_height="@dimen/fire_height"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

@@ -42,7 +42,17 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //GSON:
+    implementation (libs.gson)
+
+    //Glide
+    implementation(libs.glide)
+
+    //Lottie
+    implementation (libs.lottie)
 }

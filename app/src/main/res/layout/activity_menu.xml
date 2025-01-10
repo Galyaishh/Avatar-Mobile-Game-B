@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/menu_BTN_topRated"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/top_rated"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:rippleColor="@color/white"
+        android:contentDescription="Top Rated"
+        >
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_TXT_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#E0F2F1"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@id/menu_BTN_layout"
+        android:fontFamily="@font/avatar_air_bender"
+        android:text="Select Game Mode"
+        >
+    </com.google.android.material.textview.MaterialTextView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_TXT_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="90sp"
+        android:textStyle="bold"
+        android:textColor="#4F83CC"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@id/menu_TXT_mode"
+        android:paddingRight="16dp"
+        android:fontFamily="@font/avatar_air_bender"
+        android:text="AVATAR The Last Airbender"
+        >
+    </com.google.android.material.textview.MaterialTextView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/menu_BTN_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        >
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/menu_BTN_control"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_text_size"
+            android:backgroundTint="@color/dark_gray"
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            app:rippleColor="@color/light_gray"
+            android:fontFamily="@font/avatar_air_bender"
+            android:text="Controls"
+            />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/menu_BTN_tilt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_text_size"
+            android:backgroundTint="@color/dark_gray"
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            app:rippleColor="@color/light_gray"
+            android:fontFamily="@font/avatar_air_bender"
+            android:text="Tilt"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+<com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_startGame"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        style="@null"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/menu_BTN_layout"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/circular_button_background"
+        app:icon="@drawable/play"
+        app:iconTint="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        app:rippleColor="@color/dark_gray"
+        app:iconSize="50dp"
+        android:padding="@dimen/default_dimens"
+        android:contentDescription="Start the game">
+
+
+</com.google.android.material.button.MaterialButton>
+
+</RelativeLayout>

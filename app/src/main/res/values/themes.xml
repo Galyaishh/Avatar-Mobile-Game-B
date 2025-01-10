@@ -1,9 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.AvatarMobileGame" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Customize your button appearance -->
+        <item name="materialButtonStyle">@style/CustomMaterialButton</item>
     </style>
 
     <style name="Theme.AvatarMobileGame" parent="Base.Theme.AvatarMobileGame" />
+
+    <!-- Custom Button Style -->
+    <style name="CustomMaterialButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/light_blue</item> <!-- Button background -->
+        <item name="rippleColor">@color/dark_gray</item> <!-- Ripple effect color -->
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Fully rounded corners -->
+    </style>
 </resources>
