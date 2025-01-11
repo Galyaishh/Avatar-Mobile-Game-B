@@ -3,7 +3,7 @@ package com.example.avatar_mobile_game.utilities
 import com.example.avatar_mobile_game.utilities.Constants.ImageState
 import kotlin.random.Random
 
-class GameManager(private val livesCount: Int = 3, rows: Int, private val cols: Int) {
+class GameManager(private val livesCount: Int, rows: Int, private val cols: Int) {
 
     private var playerPosition = cols/2
     private val playerMatrix = Array(cols) { ImageState.NONE}

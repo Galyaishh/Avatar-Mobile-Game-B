@@ -1,5 +1,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/white" />
+    <!-- White background for the inner box -->
+    <solid android:color="@android:color/white" />
+
+    <!-- Black border for the rounded frame -->
+    <stroke
+        android:width="4dp"
+        android:color="@android:color/black" />
+
+    <!-- Rounded corners -->
     <corners android:radius="16dp" />
-    <stroke android:width="2dp" android:color="@color/background_color" />
 </shape>

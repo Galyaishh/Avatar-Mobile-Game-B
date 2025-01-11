@@ -8,7 +8,10 @@
     android:background="@drawable/background_game"
     tools:context=".MainActivity">
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3000000" />
     <!--hearts-->
 
     <androidx.appcompat.widget.LinearLayoutCompat

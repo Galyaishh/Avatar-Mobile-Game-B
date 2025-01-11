@@ -3,15 +3,21 @@ package com.example.avatar_mobile_game.utilities
 class Constants {
 
     object GameLogic {
-        const val DELAY = 1100L
+        const val DELAY_SLOW = 1100L
+        const val DELAY_FAST = 700L
         const val POINTS = 10
 
     }
 
-    object GameMode{
-        const val TILT = "tilt"
-        const val CONTROL = "control"
-    }
+//    object GameMode{
+//        const val TILT = "tilt"
+//        const val CONTROL = "control"
+//    }
+//
+//    object GameSpeed{
+//        const val FAST = "fast"
+//        const val SLOW = "slow"
+//    }
 
 
     enum class ImageState {
@@ -21,10 +27,14 @@ class Constants {
         COIN
     }
 
+    enum class GameMode { TILT, CONTROL }
+    enum class GameSpeed { FAST, SLOW }
+
     object BundleKeys {
         const val SCORE_KEY: String = "SCORE_KEY"
         const val STATUS_KEY: String = "STATUS_KEY"
         const val GAME_MODE_KEY: String = "GAME_MODE_KEY"
+        const val GAME_SPEED_KEY: String = "GAME_SPEED_KEY"
         const val PLAYER_RECORDS: String = "PLAYER_RECORDS"
     }
 

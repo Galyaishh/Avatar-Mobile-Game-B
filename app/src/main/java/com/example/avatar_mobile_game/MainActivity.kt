@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.avatar_mobile_game.DataManager.PlayerRecord
 import com.example.avatar_mobile_game.DataManager.RecordsManager
 import com.example.avatar_mobile_game.databinding.ActivityScoreBinding
@@ -38,8 +39,9 @@ class MainActivity : AppCompatActivity() {
     private var tiltDetector: TiltDetector? = null
     private lateinit var gameManager: GameManager
     private var gameMode: String? = null
+    private var gameSpeed: String? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
+    private var gameDelay: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +52,11 @@ class MainActivity : AppCompatActivity() {
 
         findViews()
         gameMode = intent.getStringExtra(Constants.BundleKeys.GAME_MODE_KEY)
+        gameSpeed = intent.getStringExtra(Constants.BundleKeys.GAME_SPEED_KEY)
+        if (gameSpeed == Constants.GameSpeed.FAST.toString())
+            gameDelay = Constants.GameLogic.DELAY_FAST
+        else
+            gameDelay = Constants.GameLogic.DELAY_SLOW
         gameManager = GameManager(main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
         initViews()
     }
@@ -82,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     val runnable: Runnable = object : Runnable {
         override fun run() {
-            handler.postDelayed(this, Constants.GameLogic.DELAY)
+            handler.postDelayed(this, gameDelay)
             gameProgress()
         }
     }
@@ -120,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!gameStarted && !gameManager.isGameOver) {
-            if (gameMode == Constants.GameMode.TILT)
+            if (gameMode == Constants.GameMode.TILT.toString())
                 tiltDetector?.start()
             startGame()
         }
@@ -129,14 +136,14 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         stopGame()
-        if (gameMode == Constants.GameMode.TILT)
+        if (gameMode == Constants.GameMode.TILT.toString())
             tiltDetector?.stop()
     }
 
 
     private fun startGame() {
         if (!gameStarted) {
-            handler.postDelayed(runnable, Constants.GameLogic.DELAY)
+            handler.postDelayed(runnable, gameDelay)
             gameStarted = true
 
         }
@@ -258,7 +265,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        if (gameMode == Constants.GameMode.CONTROL) {
+        if (gameMode == Constants.GameMode.CONTROL.toString()) {
             main_FAB_left.setOnClickListener {
                 gameManager.movePlayer(-1)
                 updatePlayerUI()
@@ -290,7 +297,8 @@ class MainActivity : AppCompatActivity() {
 
         // Set dialog properties
         dialog.setCancelable(false) // Prevent closing the dialog accidentally
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent) // Transparent window background
+        binding.root.background = ContextCompat.getDrawable(this, R.drawable.dialog_background) // Set the custom drawable as background
 
         // Set score and input behavior
         binding.scoreLBLScore.text = "Score: $score"
@@ -309,14 +317,45 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+
+//    private fun showGameOverDialog(score: Int) {
+//        val dialog = Dialog(this)
+//        val binding = ActivityScoreBinding.inflate(layoutInflater)
+//        dialog.setContentView(binding.root)
+//
+//        // Set dialog properties
+//        dialog.setCancelable(false) // Prevent closing the dialog accidentally
+//        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+//
+//        // Set score and input behavior
+//        binding.scoreLBLScore.text = "Score: $score"
+//        binding.scoreBTNSubmit.setOnClickListener {
+//            val playerName = binding.scoreEDTName.text.toString()
+//            if (playerName.isNotEmpty()) {
+//                savePlayerRecord(playerName, score)
+//                dialog.dismiss() // Close dialog
+//                changeActivity()
+//            } else {
+//                Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//        // Show dialog
+//        dialog.show()
+//    }
+
     private fun savePlayerRecord(playerName: String, score: Int) {
         val recordsManager = RecordsManager.getInstance()
         val playerLocation = getPlayerLocation()
-        recordsManager.addRecord(PlayerRecord(playerName,score,playerLocation))
+        recordsManager.addRecord(PlayerRecord(playerName, score, playerLocation))
     }
 
     private fun getPlayerLocation(): LatLng {
-        return if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        return if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             LatLng(0.0, 0.0)
         } else {
             var location = LatLng(0.0, 0.0)
