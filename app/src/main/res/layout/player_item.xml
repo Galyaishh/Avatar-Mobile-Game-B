@@ -6,8 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@color/white"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    android:elevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,68 +17,56 @@
 
         <!-- Rank Number -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/item_player_rank"
+            android:id="@+id/player_TXT_rank"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/circular_button_background"
             android:gravity="center"
-            tools:text="1"
             app:fontFamily="@font/avatar_air_bender"
-            android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:textSize="40sp"
             android:textStyle="bold"
-            app:cornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="1"
+            android:padding="5dp"
+            android:background="@drawable/card_background"
+            android:backgroundTint="@color/blue1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Player Avatar -->
-        <ImageView
-            android:id="@+id/item_player_avatar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_player_rank"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--            android:src="@drawable/ic_avatar_placeholder"-->
-        <!--            android:contentDescription="@string/player_avatar"-->
-        <!--            android:background="@drawable/avatar_circle_background"-->
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Player Name -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/item_player_name"
-            tools:text="Player Name"
+            android:id="@+id/player_TXT_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avatar_air_bender"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/item_player_score"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintMarginEnd="8dp"
-            app:layout_constraintMarginStart="12dp"
-            app:layout_constraintStart_toEndOf="@id/item_player_avatar"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:text="Player Name"
+            app:layout_constraintStart_toEndOf="@id/player_TXT_rank"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/player_TXT_score"
+            android:layout_marginStart="12dp" >
+        </com.google.android.material.textview.MaterialTextView>
 
         <!-- Player Score -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/item_player_score"
-            tools:text="Score: 12345"
-            android:layout_width="0dp"
+            android:id="@+id/player_TXT_score"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
             app:fontFamily="@font/avatar_air_bender"
-            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Score:\n 12345"
+            app:layout_constraintStart_toEndOf="@id/player_TXT_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintMarginEnd="8dp"
-            app:layout_constraintMarginStart="12dp"
-            app:layout_constraintStart_toEndOf="@id/item_player_avatar"
-            app:layout_constraintTop_toBottomOf="@id/item_player_name" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="12dp">
+
+        </com.google.android.material.textview.MaterialTextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,18 +1,29 @@
 package com.example.avatar_mobile_game
 
+import android.Manifest
+import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
+import com.example.avatar_mobile_game.DataManager.PlayerRecord
+import com.example.avatar_mobile_game.DataManager.RecordsManager
+import com.example.avatar_mobile_game.databinding.ActivityScoreBinding
 import com.example.avatar_mobile_game.interfaces.TiltCallback
 import com.example.avatar_mobile_game.utilities.Constants
 import com.example.avatar_mobile_game.utilities.GameManager
 import com.example.avatar_mobile_game.utilities.TiltDetector
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 
@@ -27,12 +38,16 @@ class MainActivity : AppCompatActivity() {
     private var tiltDetector: TiltDetector? = null
     private lateinit var gameManager: GameManager
     private var gameMode: String? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         findViews()
         gameMode = intent.getStringExtra(Constants.BundleKeys.GAME_MODE_KEY)
         gameManager = GameManager(main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
@@ -94,12 +109,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun loseGame() {
         stopGame()
-        changeActivity("Score:\n", gameManager.score)
-        gameManager.resetGame()
-        updateFireUI()
-        updatePlayerUI()
-        updateLivesUI()
-        startGame()
+        showGameOverDialog(gameManager.score)
+//        gameManager.resetGame()
+//        updateFireUI()
+//        updatePlayerUI()
+//        updateLivesUI()
+//        startGame()
     }
 
     override fun onResume() {
@@ -262,15 +277,56 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun changeActivity(message: String, score: Int) {
-        val intent = Intent(this, ScoreActivity::class.java)
-        var bundle = Bundle()
-        bundle.putInt(Constants.BundleKeys.SCORE_KEY, score)
-        bundle.putString(Constants.BundleKeys.STATUS_KEY, message)
-        intent.putExtras(bundle)
+    private fun changeActivity() {
+        val intent = Intent(this, RecordsActivity::class.java)
         startActivity(intent)
         finish()
     }
 
+    private fun showGameOverDialog(score: Int) {
+        val dialog = Dialog(this)
+        val binding = ActivityScoreBinding.inflate(layoutInflater)
+        dialog.setContentView(binding.root)
+
+        // Set dialog properties
+        dialog.setCancelable(false) // Prevent closing the dialog accidentally
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        // Set score and input behavior
+        binding.scoreLBLScore.text = "Score: $score"
+        binding.scoreBTNSubmit.setOnClickListener {
+            val playerName = binding.scoreEDTName.text.toString()
+            if (playerName.isNotEmpty()) {
+                savePlayerRecord(playerName, score)
+                dialog.dismiss() // Close dialog
+                changeActivity()
+            } else {
+                Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Show dialog
+        dialog.show()
+    }
+
+    private fun savePlayerRecord(playerName: String, score: Int) {
+        val recordsManager = RecordsManager.getInstance()
+        val playerLocation = getPlayerLocation()
+        recordsManager.addRecord(PlayerRecord(playerName,score,playerLocation))
+    }
+
+    private fun getPlayerLocation(): LatLng {
+        return if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            LatLng(0.0, 0.0)
+        } else {
+            var location = LatLng(0.0, 0.0)
+            fusedLocationClient.lastLocation.addOnSuccessListener { loc ->
+                if (loc != null) {
+                    location = LatLng(loc.latitude, loc.longitude)
+                }
+            }
+            location
+        }
+    }
 
 }

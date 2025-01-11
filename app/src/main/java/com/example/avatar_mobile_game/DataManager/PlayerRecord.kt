@@ -4,7 +4,6 @@ import com.google.android.gms.maps.model.LatLng
 
 data class PlayerRecord(
     val name: String,
-    val rank: Int,
     val score: Int,
-    val location: LatLng
+    val location: LatLng = LatLng(0.0, 0.0) // Default location
 )

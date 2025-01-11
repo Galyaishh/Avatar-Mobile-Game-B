@@ -28,5 +28,9 @@ class Constants {
         const val PLAYER_RECORDS: String = "PLAYER_RECORDS"
     }
 
+    object RequestCodes {
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1001
+    }
+
 
 }

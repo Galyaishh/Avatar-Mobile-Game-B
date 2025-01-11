@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#4F83CC"/>
+    <solid android:color="@color/blue1" /> <!-- Same color as the tint -->
     <corners android:radius="300dp" />
     <stroke
         android:width="2dp"
-        android:color="#42A5F5" /> <!-- Slightly darker blue -->
+        android:color="@color/dark_blue" /> <!-- Border matches the button -->
 </shape>
