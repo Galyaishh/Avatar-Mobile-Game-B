@@ -18,15 +18,12 @@ import androidx.core.content.ContextCompat
 import com.example.avatar_mobile_game.DataManager.PlayerRecord
 import com.example.avatar_mobile_game.DataManager.RecordsManager
 import com.example.avatar_mobile_game.databinding.ActivityScoreBinding
-import com.example.avatar_mobile_game.interfaces.TiltCallback
 import com.example.avatar_mobile_game.utilities.Constants
 import com.example.avatar_mobile_game.utilities.GameManager
-import com.example.avatar_mobile_game.utilities.TiltDetector
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.example.avatar_mobile_game.HighScoresActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -69,11 +66,10 @@ class MainActivity : AppCompatActivity() {
     private fun initGameSettings() {
         gameMode = intent.getStringExtra(Constants.BundleKeys.GAME_MODE_KEY)
         gameSpeed = intent.getStringExtra(Constants.BundleKeys.GAME_SPEED_KEY)
-        gameDelay = if (gameSpeed == Constants.GameSpeed.FAST.toString()) {
+        gameDelay = if (gameSpeed == Constants.GameSpeed.FAST.toString())
             Constants.GameLogic.DELAY_FAST
-        } else {
+        else
             Constants.GameLogic.DELAY_SLOW
-        }
     }
 
     private fun setupGameManager() {
@@ -96,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.main_IMG_aang53),
             findViewById(R.id.main_IMG_aang54)
         )
-                main_IMG_fire = arrayOf(
+        main_IMG_fire = arrayOf(
             arrayOf(
                 findViewById(R.id.main_MAT_00),
                 findViewById(R.id.main_MAT_01),
@@ -174,16 +170,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    private fun gameProgress() {
+//        if (!gameManager.isGameOver) {
+//            gameManager.moveEntitiesDown()
+//            gameManager.spawnEntity()
+//            updateLivesUI()
+//            updateGameMatrixUI()
+//
+//            if (gameManager.checkCollision())
+//                gameManager.handleCollision()
+//            if (gameManager.checkFoundAppa())
+//                gameManager.handleFoundAppa()
+//            updateScoreUI()
+//        } else
+//            endGame()
+//    }
+
     private fun gameProgress() {
         if (!gameManager.isGameOver) {
-            gameManager.moveFireDown()
-            gameManager.spawnFire()
-            updateFireUI()
-            if (gameManager.checkCollision()) {
-                gameManager.handleCollision()
-                updateLivesUI()
-            }
-            gameManager.score += Constants.GameLogic.POINTS
+            gameManager.moveEntitiesDown()
+            gameManager.spawnEntity()
+
+            // Update game and player interactions
+            gameManager.movePlayer(0) // Keep current position, check for interaction
+            updateLivesUI()
+            updateGameMatrixUI()
             updateScoreUI()
         } else {
             endGame()
@@ -192,6 +203,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun endGame() {
         stopGame()
+        updateLivesUI()
         showGameOverDialog(gameManager.score)
     }
 
@@ -225,11 +237,9 @@ class MainActivity : AppCompatActivity() {
                 savePlayerRecord(playerName, score)
                 dialog.dismiss()
                 navigateToHighScores()
-            } else {
+            } else
                 Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
-            }
         }
-
         dialog.show()
     }
 
@@ -243,9 +253,8 @@ class MainActivity : AppCompatActivity() {
                     ?: LatLng(0.0, 0.0)
                 addRecord(playerName, score, playerLocation)
             }
-        } else {
+        } else
             addRecord(playerName, score, LatLng(0.0, 0.0))
-        }
     }
 
     private fun addRecord(playerName: String, score: Int, location: LatLng) {
@@ -263,11 +272,15 @@ class MainActivity : AppCompatActivity() {
         main_LBL_score.text = "${gameManager.score}"
     }
 
-    private fun updateFireUI() {
-        gameManager.getFireMatrix().forEachIndexed { rowIndex, row ->
+    private fun updateGameMatrixUI() {
+        gameManager.getGameMatrix().forEachIndexed { rowIndex, row ->
             row.forEachIndexed { colIndex, cell ->
                 main_IMG_fire[rowIndex][colIndex].apply {
-                    setImageResource(if (cell == Constants.ImageState.FIRE) R.drawable.fire else 0)
+                    when(cell){
+                        Constants.ImageState.FIRE -> setImageResource(R.drawable.fire)
+                        Constants.ImageState.APPA -> setImageResource(R.drawable.appa)
+                        else -> setImageResource(0)
+                    }
                 }
             }
         }
@@ -283,13 +296,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateLivesUI() {
         main_IMG_hearts.forEachIndexed { index, heart ->
-            heart.visibility = if (index < gameManager.numberOfCollisions) View.INVISIBLE else View.VISIBLE
+            heart.visibility =
+                if (index < gameManager.numberOfCollisions) View.INVISIBLE else View.VISIBLE
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (!gameStarted) startGame()
+        if (!gameStarted)
+            startGame()
     }
 
     override fun onPause() {

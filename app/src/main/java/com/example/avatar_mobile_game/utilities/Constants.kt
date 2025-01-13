@@ -6,6 +6,7 @@ class Constants {
         const val DELAY_SLOW = 1100L
         const val DELAY_FAST = 700L
         const val POINTS = 10
+        const val APPA_SPAWN_CHANCE = 20
 
     }
 
@@ -24,7 +25,7 @@ class Constants {
         NONE,
         PLAYER,
         FIRE,
-        COIN
+        APPA
     }
 
     enum class GameMode { TILT, CONTROL }
