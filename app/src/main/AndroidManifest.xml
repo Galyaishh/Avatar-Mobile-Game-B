@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".RecordsActivity"
+            android:name=".HighScoresActivity"
             android:exported="true"
             android:launchMode="singleTop">
 

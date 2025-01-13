@@ -15,6 +15,123 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 class MenuActivity : AppCompatActivity() {
 
+//    // UI Elements
+//    private lateinit var menu_BTN_tilt: ExtendedFloatingActionButton
+//    private lateinit var menu_BTN_control: ExtendedFloatingActionButton
+//    private lateinit var menu_BTN_fast: ExtendedFloatingActionButton
+//    private lateinit var menu_BTN_slow: ExtendedFloatingActionButton
+//    private lateinit var menu_BTN_startGame: MaterialButton
+//    private lateinit var menu_BTN_topRated: ExtendedFloatingActionButton
+//
+//    // Game Settings
+//    private var gameMode: Constants.GameMode? = null
+//    private var gameSpeed: Constants.GameSpeed? = null
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_menu)
+//        enableEdgeToEdge()
+//
+//        findViews()
+//        initViews()
+//        requestLocationPermission()
+//    }
+//
+//    // Link UI elements to variables
+//    private fun findViews() {
+//        menu_BTN_tilt = findViewById(R.id.menu_BTN_tilt)
+//        menu_BTN_control = findViewById(R.id.menu_BTN_control)
+//        menu_BTN_fast = findViewById(R.id.menu_BTN_fast)
+//        menu_BTN_slow = findViewById(R.id.menu_BTN_slow)
+//        menu_BTN_startGame = findViewById(R.id.menu_BTN_startGame)
+//        menu_BTN_topRated = findViewById(R.id.menu_BTN_topRated)
+//    }
+//
+//    // Initialize click listeners and game logic
+//    private fun initViews() {
+//        // Game Mode Selection
+//        menu_BTN_tilt.setOnClickListener { selectGameMode(Constants.GameMode.TILT, menu_BTN_tilt) }
+//        menu_BTN_control.setOnClickListener { selectGameMode(Constants.GameMode.CONTROL, menu_BTN_control) }
+//
+//        // Game Speed Selection
+//        menu_BTN_fast.setOnClickListener { selectGameSpeed(Constants.GameSpeed.FAST, menu_BTN_fast) }
+//        menu_BTN_slow.setOnClickListener { selectGameSpeed(Constants.GameSpeed.SLOW, menu_BTN_slow) }
+//
+//        // Start Game Button
+//        menu_BTN_startGame.setOnClickListener {
+//            if (gameMode == null || gameSpeed == null) {
+//                Toast.makeText(this, "Please select both game mode and speed", Toast.LENGTH_SHORT).show()
+//            } else {
+//                navigateToActivity(
+//                    MainActivity::class.java,
+//                    Bundle().apply {
+//                        putString(Constants.BundleKeys.GAME_MODE_KEY, gameMode.toString())
+//                        putString(Constants.BundleKeys.GAME_SPEED_KEY, gameSpeed.toString())
+//                    }
+//                )
+//            }
+//        }
+//
+//        // Top Scores Button
+//        menu_BTN_topRated.setOnClickListener {
+//            navigateToActivity(HighScoresActivity::class.java)
+//        }
+//    }
+//
+//    // Game Mode Selection Logic
+//    private fun selectGameMode(mode: Constants.GameMode, button: ExtendedFloatingActionButton) {
+//        if (gameMode == mode) {
+//            Toast.makeText(this, "${mode.name} mode is already selected", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//        gameMode = mode
+//        updateButtonSelection(arrayOf(menu_BTN_tilt, menu_BTN_control), button)
+//    }
+//
+//    // Game Speed Selection Logic
+//    private fun selectGameSpeed(speed: Constants.GameSpeed, button: ExtendedFloatingActionButton) {
+//        if (gameSpeed == speed) {
+//            Toast.makeText(this, "${speed.name} speed is already selected", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//        gameSpeed = speed
+//        updateButtonSelection(arrayOf(menu_BTN_fast, menu_BTN_slow), button)
+//    }
+//
+//    // Update Button States (Visual Feedback)
+//    private fun updateButtonSelection(
+//        buttons: Array<ExtendedFloatingActionButton>,
+//        selectedButton: ExtendedFloatingActionButton
+//    ) {
+//        buttons.forEach {
+//            it.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_gray))
+//        }
+//        selectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_gray))
+//    }
+//
+//    // Navigate to Another Activity
+//    private fun navigateToActivity(targetActivity: Class<*>, extras: Bundle? = null) {
+//        val intent = Intent(this, targetActivity)
+//        extras?.let { intent.putExtras(it) }
+//        startActivity(intent)
+//    }
+//
+//    // Request Location Permission for Features Requiring Location Access
+//    private fun requestLocationPermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//            != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION
+//                ),
+//                Constants.RequestCodes.LOCATION_PERMISSION_REQUEST_CODE
+//            )
+//        }
+//    }
+
     private lateinit var menu_BTN_tilt: ExtendedFloatingActionButton
     private lateinit var menu_BTN_control: ExtendedFloatingActionButton
     private lateinit var menu_BTN_fast: ExtendedFloatingActionButton
@@ -64,7 +181,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         menu_BTN_topRated.setOnClickListener {
-            changeActivity(RecordsActivity::class.java)
+            changeActivity(HighScoresActivity::class.java)
         }
     }
 

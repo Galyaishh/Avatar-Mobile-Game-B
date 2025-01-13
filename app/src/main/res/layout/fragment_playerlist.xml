@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PlayerListFragment">
+
+    <!-- Title Section -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/records_LAY_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/blue1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="PLAYER NAME"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SCORE"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- No Players Message -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/records_LBL_no_players"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Players Yet"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:padding="40dp"
+        android:textColor="@color/black" />
+
+    <!-- RecyclerView for Player List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/records_RV_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/records_LAY_title"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        tools:listitem="@layout/player_item" />
+
+</RelativeLayout>

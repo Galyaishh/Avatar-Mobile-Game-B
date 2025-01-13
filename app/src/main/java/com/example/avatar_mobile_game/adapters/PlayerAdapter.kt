@@ -10,7 +10,7 @@ import com.example.avatar_mobile_game.interfaces.PlayerCallback
 class PlayerAdapter(private val players: List<PlayerRecord>) :
     RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
 
-    var playerCallback: PlayerCallback? = null
+    var onPlayerClickListener: PlayerCallback? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         val binding = PlayerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,7 +30,9 @@ class PlayerAdapter(private val players: List<PlayerRecord>) :
             playerTXTScore.text = "Score: ${player.score}"
 
             root.setOnClickListener {
-                playerCallback?.onPlayerClicked(player, position)
+                onPlayerClickListener?.let {
+                    it.showLocationOnMap(player, position)
+                }
             }
         }
     }
