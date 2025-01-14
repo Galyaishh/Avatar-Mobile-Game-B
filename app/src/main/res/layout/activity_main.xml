@@ -19,7 +19,7 @@
         android:layout_height="@dimen/default_dimens"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginTop="@dimen/top_margin"
         android:layout_marginRight="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -51,9 +51,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="@dimen/default_margin"
         android:textSize="45sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:gravity="center"
         tools:text="000"
         />
@@ -67,8 +68,8 @@
         android:layout_height="@dimen/arrow_dimen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/default_margin"
-        android:backgroundTint="@color/blue1"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/background_color"
         android:clickable="true"
         android:focusable="true"
         android:elevation="10dp"
@@ -84,8 +85,8 @@
         android:layout_height="@dimen/arrow_dimen"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/default_margin"
-        android:backgroundTint="@color/blue1"
+        android:layout_margin="@dimen/buttons_margin"
+        android:backgroundTint="@color/background_color"
         android:clickable="true"
         android:focusable="true"
         android:elevation="10dp"
@@ -102,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="85dp">
+        android:layout_marginBottom="@dimen/margin_player">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_aang50"

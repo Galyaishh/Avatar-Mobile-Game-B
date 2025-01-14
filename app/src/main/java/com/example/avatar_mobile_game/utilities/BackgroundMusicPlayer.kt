@@ -73,9 +73,9 @@ class BackgroundMusicPlayer private constructor(context: Context) {
             }
         }
 
-        fun getInstance(): BackgroundMusicPlayer{
-            return instance ?:
-            throw IllegalStateException("BackgroundMusicPlayer must be initialized by calling init(context) before use.")
+        fun getInstance(): BackgroundMusicPlayer {
+            return instance
+                ?: throw IllegalStateException("BackgroundMusicPlayer must be initialized by calling init(context) before use.")
         }
     }
 }

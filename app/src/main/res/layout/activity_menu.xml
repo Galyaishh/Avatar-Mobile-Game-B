@@ -9,14 +9,12 @@
         android:layout_height="match_parent"
         android:background="#80000000" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/menu_BTN_topRated"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        app:icon="@drawable/top_rated"
-        app:iconSize="40dp"
-        app:backgroundTint="@color/dark_gray"
-        android:layout_margin="35dp"
+        android:background="@drawable/top_rated"
+        android:layout_margin="16dp"
         app:rippleColor="@color/white"
         android:clickable="true"
         android:focusable="true"
@@ -40,14 +38,14 @@
         android:id="@+id/menu_TXT_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="90sp"
+        android:textSize="75sp"
         android:textStyle="bold"
         android:textColor="@color/blue1"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/menu_TXT_mode"
-        android:layout_marginBottom="50dp"
-        android:paddingRight="16dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:paddingRight="@dimen/default_padding"
         android:fontFamily="@font/avatar_air_bender"
         android:text="AVATAR The Last Airbender" />
 

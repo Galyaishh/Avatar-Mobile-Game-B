@@ -42,49 +42,4 @@ class MapFragment : Fragment() {
         googleMap.addMarker(MarkerOptions().position(location).title("Player Location"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
-
-//    private lateinit var googleMap: GoogleMap
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_map, container, false)
-//
-//        val mapFragment =
-//            childFragmentManager.findFragmentById(R.id.map_LAY_map) as? SupportMapFragment
-//        mapFragment?.getMapAsync { map ->
-//            googleMap = map
-//            googleMap.uiSettings.isZoomControlsEnabled = true
-//        }
-//
-//        return view
-//    }
-//
-//    fun onMapReady(map: GoogleMap) {
-//        googleMap = map
-//        googleMap.uiSettings.isZoomControlsEnabled = true
-//        googleMap.uiSettings.isScrollGesturesEnabled = true
-//        googleMap.uiSettings.isTiltGesturesEnabled = false
-//        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
-//    }
-//
-//    fun showPlayerLocation(location: LatLng?) {
-//
-//        if(location == null) {
-//            Toast.makeText(this.context, "Location is null", Toast.LENGTH_SHORT).show()
-//            googleMap.clear()
-//            return
-//        }
-//        googleMap.clear()
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
-//        googleMap.addMarker(MarkerOptions().position(location).title("Player Location"))
-
-
-//        if (::googleMap.isInitialized && location != null) {
-//            googleMap.clear()
-//            googleMap.addMarker(MarkerOptions().position(location).title("Player Location"))
-//            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
-//        }
 }

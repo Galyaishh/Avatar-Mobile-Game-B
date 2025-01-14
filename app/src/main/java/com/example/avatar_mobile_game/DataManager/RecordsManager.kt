@@ -32,8 +32,8 @@ class RecordsManager private constructor(context: Context) {
     fun addRecord(record: PlayerRecord) {
         val records = getRecords().toMutableList()
         records.add(record)
-        records.sortByDescending { it.score } // Sort by score in descending order
-        saveRecords(records.take(10)) // Keep only the top 10 records
+        records.sortByDescending { it.score }
+        saveRecords(records.take(10)) //Keep only the top 10 records
     }
 
     fun clearRecords() {

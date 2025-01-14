@@ -1,8 +1,9 @@
-package com.example.avatar_mobile_game.utilities
+package com.example.avatar_mobile_game
 
 import android.app.Application
 import com.example.avatar_mobile_game.DataManager.RecordsManager
-import com.example.avatar_mobile_game.R
+import com.example.avatar_mobile_game.utilities.BackgroundMusicPlayer
+import com.example.avatar_mobile_game.utilities.SignalManager
 
 class App : Application() {
 
@@ -12,8 +13,6 @@ class App : Application() {
         RecordsManager.init(this)
         BackgroundMusicPlayer.init(this)
         BackgroundMusicPlayer.getInstance().setResourceID(R.raw.background_music)
-        //        ImageLoader.init(this)
-
     }
 
     override fun onTerminate() {

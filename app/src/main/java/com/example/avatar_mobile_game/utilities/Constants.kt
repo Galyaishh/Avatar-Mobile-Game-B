@@ -10,17 +10,6 @@ class Constants {
 
     }
 
-//    object GameMode{
-//        const val TILT = "tilt"
-//        const val CONTROL = "control"
-//    }
-//
-//    object GameSpeed{
-//        const val FAST = "fast"
-//        const val SLOW = "slow"
-//    }
-
-
     enum class ImageState {
         NONE,
         PLAYER,

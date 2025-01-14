@@ -5,7 +5,12 @@ import kotlin.random.Random
 import android.content.Context
 import com.example.avatar_mobile_game.R
 
-class GameManager(private val context: Context, private val livesCount: Int, rows: Int, private val cols: Int) {
+class GameManager(
+    private val context: Context,
+    private val livesCount: Int,
+    rows: Int,
+    private val cols: Int
+) {
 
     private var playerPosition = cols / 2
     private val playerMatrix = Array(cols) { ImageState.NONE }
@@ -51,31 +56,20 @@ class GameManager(private val context: Context, private val livesCount: Int, row
             }
         }
     }
-//    fun handlePlayerInteraction(): Constants.InteractionResult {
-//        val playerCell = gameMatrix[gameMatrix.size - 1][playerPosition]
-//        return when (playerCell) {
-//            Constants.ImageState.FIRE -> {
-//                handleCollision()
-//                Constants.InteractionResult.COLLISION
-//            }
-//            Constants.ImageState.APPA -> {
-//                handleFoundAppa()
-//                Constants.InteractionResult.APPA_FOUND
-//            }
-//            else -> Constants.InteractionResult.NONE
-//        }
-//    }
 
-//    private fun checkPlayerInteraction() {
-//        if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.FIRE)
-//            handleCollision()
-//        else if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.APPA)
-//            handleFoundAppa()
-//    }
+    fun handleCollision() {
+        ssp.playSound(R.raw.firesound)
+        numberOfCollisions++
+        SignalManager.getInstance().vibrate()
+        if (!isGameOver)
+            SignalManager.getInstance().toast("Fire nation hit you!")
+        else
+            SignalManager.getInstance().toast("You lose!")
+    }
 
     fun handleFoundAppa() {
         score += Constants.GameLogic.POINTS
-        SignalManager.getInstance().toast("You found an APPA!")
+        SignalManager.getInstance().toast("You found APPA!")
     }
 
 
@@ -96,16 +90,6 @@ class GameManager(private val context: Context, private val livesCount: Int, row
             gameMatrix[0][col] = ImageState.NONE // Clear the top row
     }
 
-
-    fun handleCollision() {
-        ssp.playSound(R.raw.firesound)
-        numberOfCollisions++
-        SignalManager.getInstance().vibrate()
-        if (!isGameOver)
-            SignalManager.getInstance().toast("Fire nation hit you!")
-        else
-            SignalManager.getInstance().toast("You lose!")
-    }
 
     fun resetGame() {
 

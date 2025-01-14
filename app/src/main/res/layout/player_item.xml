@@ -28,7 +28,7 @@
             tools:text="1"
             android:padding="5dp"
             android:background="@drawable/card_background"
-            android:backgroundTint="@color/blue1"
+            android:backgroundTint="@color/background_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -59,7 +59,7 @@
             android:textSize="25sp"
             android:textStyle="bold"
             app:fontFamily="@font/avatar_air_bender"
-            tools:text="Score:\n 12345"
+            tools:text="12345"
             app:layout_constraintStart_toEndOf="@id/player_TXT_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -29,22 +29,11 @@ class HighScoresActivity : AppCompatActivity() {
         highscores_BTN_back = findViewById(R.id.highscores_BTN_back)
         highscores_BTN_back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-
-//            changeActivity()
         }
     }
 
-    private fun changeActivity() {
-        val intent = Intent(this, MenuActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     private fun setupFragments() {
-        // Initialize the map fragment
         mapFragment = MapFragment()
-
-        // Initialize the player list fragment with the click listener
         playerListFragment = PlayerListFragment()
         playerListFragment.playerClicked = object : PlayerCallback {
             override fun showLocationOnMap(player: PlayerRecord, position: Int) {
@@ -52,7 +41,7 @@ class HighScoresActivity : AppCompatActivity() {
             }
         }
 
-        // Add fragments to the layout
+        //Add fragments to the layout
         supportFragmentManager.beginTransaction()
             .replace(R.id.highscores_FRAME_list, playerListFragment)
             .replace(R.id.highscores_FRAME_map, mapFragment)

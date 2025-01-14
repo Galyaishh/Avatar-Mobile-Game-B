@@ -8,18 +8,20 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/records_LAY_title"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/blue1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/background_color"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingEnd="@dimen/default_padding"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/title_height"
             android:layout_weight="1"
+            android:layout_marginStart="45dp"
             android:text="PLAYER NAME"
+            android:gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -30,7 +32,7 @@
             android:shadowRadius="8" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SCORE"

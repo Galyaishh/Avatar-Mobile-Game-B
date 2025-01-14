@@ -8,12 +8,12 @@
     <!-- Back Button -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/highscores_BTN_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/back_arrow_width"
+        android:layout_height="@dimen/back_arrow_height"
+        android:layout_margin="5dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/back_arrow"
+        android:src="@drawable/baseline_arrow_back_24"
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="Back"
@@ -33,7 +33,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <!-- Map Fragment -->
         <FrameLayout

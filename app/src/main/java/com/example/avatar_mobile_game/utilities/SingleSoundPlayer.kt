@@ -15,15 +15,12 @@ class SingleSoundPlayer(context: Context) {
             mediaPlayer.isLooping = false
             mediaPlayer.setVolume(1.0f, 1.0f)
             mediaPlayer.start()
-            mediaPlayer.setOnCompletionListener {mp: MediaPlayer? ->
+            mediaPlayer.setOnCompletionListener { mp: MediaPlayer? ->
                 var mpl = mp
                 mpl!!.stop()
                 mpl.release()
                 mpl = null
             }
-
-
         }
-
     }
 }

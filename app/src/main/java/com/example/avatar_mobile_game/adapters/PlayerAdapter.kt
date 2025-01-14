@@ -27,7 +27,7 @@ class PlayerAdapter(private val players: List<PlayerRecord>) :
         with(holder.binding) {
             playerTXTRank.text = (position + 1).toString()
             playerTXTName.text = player.name
-            playerTXTScore.text = "Score: ${player.score}"
+            playerTXTScore.text = "${player.score}"
 
             root.setOnClickListener {
                 onPlayerClickListener?.let {
