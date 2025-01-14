@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.example.avatar_mobile_game.DataManager.PlayerRecord
 import com.example.avatar_mobile_game.DataManager.RecordsManager
 import com.example.avatar_mobile_game.databinding.ActivityScoreBinding
+import com.example.avatar_mobile_game.utilities.BackgroundMusicPlayer
 import com.example.avatar_mobile_game.utilities.Constants
 import com.example.avatar_mobile_game.utilities.GameManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -55,12 +56,14 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        BackgroundMusicPlayer.getInstance().playMusic()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         findViews()
         initGameSettings()
         setupGameManager()
         initViews()
+
     }
 
     private fun initGameSettings() {
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupGameManager() {
-        gameManager = GameManager(main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
+        gameManager = GameManager(this ,main_IMG_hearts.size, main_IMG_fire.size, main_IMG_fire[0].size)
     }
 
     private fun findViews() {
@@ -190,15 +193,12 @@ class MainActivity : AppCompatActivity() {
         if (!gameManager.isGameOver) {
             gameManager.moveEntitiesDown()
             gameManager.spawnEntity()
-
-            // Update game and player interactions
-            gameManager.movePlayer(0) // Keep current position, check for interaction
+            gameManager.movePlayer(0) //Keep current position, check for interaction
             updateLivesUI()
             updateGameMatrixUI()
             updateScoreUI()
-        } else {
+        } else
             endGame()
-        }
     }
 
     private fun endGame() {
@@ -211,6 +211,7 @@ class MainActivity : AppCompatActivity() {
         if (!gameStarted) {
             handler.postDelayed(gameRunnable, gameDelay)
             gameStarted = true
+//            BackgroundMusicPlayer.getInstance().playMusic()
         }
     }
 
@@ -218,6 +219,8 @@ class MainActivity : AppCompatActivity() {
         if (gameStarted) {
             handler.removeCallbacks(gameRunnable)
             gameStarted = false
+//            BackgroundMusicPlayer.getInstance().pauseMusic()
+
         }
     }
 
@@ -305,11 +308,13 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         if (!gameStarted)
             startGame()
+        BackgroundMusicPlayer.getInstance().playMusic()
     }
 
     override fun onPause() {
         super.onPause()
         stopGame()
+        BackgroundMusicPlayer.getInstance().pauseMusic()
     }
 
 //    private lateinit var main_FAB_left: ExtendedFloatingActionButton

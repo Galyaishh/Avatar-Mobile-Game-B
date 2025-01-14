@@ -2,12 +2,16 @@ package com.example.avatar_mobile_game.utilities
 
 import com.example.avatar_mobile_game.utilities.Constants.ImageState
 import kotlin.random.Random
+import android.content.Context
+import com.example.avatar_mobile_game.R
 
-class GameManager(private val livesCount: Int, rows: Int, private val cols: Int) {
+class GameManager(private val context: Context, private val livesCount: Int, rows: Int, private val cols: Int) {
 
     private var playerPosition = cols / 2
     private val playerMatrix = Array(cols) { ImageState.NONE }
     private val gameMatrix = Array(rows) { Array(cols) { ImageState.NONE } }
+
+    private val ssp = SingleSoundPlayer(context)
 
     var score: Int = 0
 
@@ -31,27 +35,19 @@ class GameManager(private val livesCount: Int, rows: Int, private val cols: Int)
             playerMatrix[playerPosition] = ImageState.PLAYER
 
             handlePlayerInteraction()
-//            checkPlayerInteraction()
-//            if (checkCollision())
-//                handleCollision()
-//            if (checkFoundAppa())
-//                handleFoundAppa()
         }
     }
 
     private fun handlePlayerInteraction() {
         val playerCell = gameMatrix[gameMatrix.size - 1][playerPosition]
         when (playerCell) {
-            ImageState.FIRE -> {
+            ImageState.FIRE ->
                 handleCollision()
-                gameMatrix[gameMatrix.size - 1][playerPosition] = ImageState.NONE // Remove FIRE
-            }
-            ImageState.APPA -> {
+
+            ImageState.APPA ->
                 handleFoundAppa()
-                gameMatrix[gameMatrix.size - 1][playerPosition] = ImageState.NONE // Remove APPA
-            }
-            else -> {
-                // No interaction
+
+            else -> { // No interaction
             }
         }
     }
@@ -70,16 +66,15 @@ class GameManager(private val livesCount: Int, rows: Int, private val cols: Int)
 //        }
 //    }
 
-    private fun checkPlayerInteraction() {
-        if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.FIRE)
-            handleCollision()
-        else if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.APPA)
-            handleFoundAppa()
-    }
+//    private fun checkPlayerInteraction() {
+//        if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.FIRE)
+//            handleCollision()
+//        else if (gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.APPA)
+//            handleFoundAppa()
+//    }
 
     fun handleFoundAppa() {
         score += Constants.GameLogic.POINTS
-//        gameMatrix[gameMatrix.size - 1][playerPosition] = ImageState.NONE
         SignalManager.getInstance().toast("You found an APPA!")
     }
 
@@ -102,15 +97,8 @@ class GameManager(private val livesCount: Int, rows: Int, private val cols: Int)
     }
 
 
-    fun checkCollision(): Boolean {
-        return gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.FIRE
-    }
-
-    fun checkFoundAppa(): Boolean {
-        return gameMatrix[gameMatrix.size - 1][playerPosition] == ImageState.APPA
-    }
-
     fun handleCollision() {
+        ssp.playSound(R.raw.firesound)
         numberOfCollisions++
         SignalManager.getInstance().vibrate()
         if (!isGameOver)
